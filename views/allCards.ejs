@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Cards</title>
+</head>
+<body>
+  <h1>All Cards</h1>
+
+  <a href="/">Back to Home</a>
+  <ul>
+    <% cards.forEach(card => { %>
+      <li>
+        <strong>Question:</strong> <%= card.question %> <br>
+        <strong>Answer:</strong> <%= card.answer %> <br>
+        <strong>Tag:</strong> <%= card.tag %> <br>
+        <hr>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>
