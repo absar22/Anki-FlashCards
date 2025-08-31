@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create New Card</title>
+</head>
+<body>
+  <h1>Create a New Card</h1>
+
+  
+  <form action="/cards" method="POST">
+    <label>Front (Question):</label><br>
+    <textarea name="front" rows="4" cols="50" required></textarea><br><br>
+
+    <label>Back (Answer):</label><br>
+    <textarea name="back" rows="4" cols="50" required></textarea><br><br>
+
+    <label>Tag / Deck:</label><br>
+    <input type="text" name="deck"><br><br>
+
+    <button type="submit">Save Card</button>
+  </form>
+
+
+  <br>
+  <a href="/">Back to Home</a>
+</body>
+</html>
