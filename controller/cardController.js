@@ -24,5 +24,17 @@ module.exports = {
       console.error(err)
       res.status(500).send('Error creating card')
     }
+  },
+
+//   Show All the cards
+   
+  showAllCards: async (req, res) => {
+    try {
+      const cards = await Card.find().sort({createdAt: -1})
+      res.render('allCards', {cards})
+    } catch (err) {
+      console.error(err)
+      res.status(500).send('Error fetching cards')
+    }
   }
 }
