@@ -9,12 +9,6 @@ You can create, edit, and delete cards to make studying easier.
 
 
 ![Home Screenshot]((./screenshots/home.png))
-![Create-New-Cardt](<img width="1920" height="859" alt="Create New Card" src="https://github.com/user-attachments/assets/73ca686f-a154-479e-aa52-d5f44a1cfdc0" />
-)
-![Display-All-Cards](<img width="1920" height="859" alt="display-AllCards" src="https://github.com/user-attachments/assets/3833b5e2-fecf-40e4-9650-39979b7c8b63" />
-)
-![Edit-Cards](<img width="1920" height="1020" alt="EditCards" src="https://github.com/user-attachments/assets/84b2293f-e2fc-47a0-b7af-c20b45e861a1" />
-)
 
 ---
 
