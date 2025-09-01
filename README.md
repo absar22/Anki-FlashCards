@@ -1,4 +1,4 @@
-# 🃏 Anki Cards (Flashcards App)
+#  Anki Cards (Flashcards App)
 
 A simple **Anki-like Flashcards App** built with **Node.js, Express, MongoDB, and EJS**.  
 You can create, edit, and delete cards to make studying easier.
@@ -64,7 +64,7 @@ npm install
 3. Setup environment variables
 
 Create a .env file in the root:
-MONGO_URI=your_mongodb_connection_string
+DB_STRING=your_mongodb_connection_string
 PORT=5000
 
 4. Run the app
