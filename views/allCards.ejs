@@ -14,6 +14,14 @@
         <strong>Question:</strong> <%= card.question %> <br>
         <strong>Answer:</strong> <%= card.answer %> <br>
         <strong>Tag:</strong> <%= card.tag %> <br>
+       
+         <!-- Edit button -->
+        <a href="/cards/<%= card._id %>/edit" class="edit">✏️ Edit</a>
+
+        <!-- Delete button -->
+        <form action="/cards/<%= card._id %>?_method=DELETE" method="POST" style="display:inline;">
+          <button type="submit" class="del">🗑️ Delete</button>
+        </form>
         <hr>
       </li>
     <% }) %>
