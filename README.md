@@ -8,7 +8,8 @@ You can create, edit, and delete cards to make studying easier.
 ## 📸 Screenshots
 
 ### 🏠 Home
-![Home Screenshot](https://github.com/your-username/Anki-FlashCards/blob/main/home.png?raw=true)
+![Home Screenshot]
+<img width="1920" height="849" alt="home" src="https://github.com/user-attachments/assets/126d450f-4419-4742-8a58-0244c010e8f5" />
 
 ### ➕ Create New Card
 ![Create New Card](https://github.com/your-username/Anki-FlashCards/blob/main/create-card.png?raw=true)
