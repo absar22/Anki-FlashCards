@@ -8,7 +8,8 @@ You can create, edit, and delete cards to make studying easier.
 ## 📸 Screenshot
 
 
-![Home Screenshot]((./screenshots/home.png))
+![Home Screenshot](./screenshots/home.png)
+
 
 ---
 
