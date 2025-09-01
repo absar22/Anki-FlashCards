@@ -8,8 +8,7 @@ You can create, edit, and delete cards to make studying easier.
 ## 📸 Screenshot
 
 
-![Home Screenshot](<img width="1920" height="849" alt="home png" src="https://github.com/user-attachments/assets/1ecc63fd-5e14-4f2a-9345-a15d12ac45f4" />
-)
+![Home Screenshot]((./screenshots/home.png))
 ![Create-New-Cardt](<img width="1920" height="859" alt="Create New Card" src="https://github.com/user-attachments/assets/73ca686f-a154-479e-aa52-d5f44a1cfdc0" />
 )
 ![Display-All-Cards](<img width="1920" height="859" alt="display-AllCards" src="https://github.com/user-attachments/assets/3833b5e2-fecf-40e4-9650-39979b7c8b63" />
