@@ -5,10 +5,19 @@ You can create, edit, and delete cards to make studying easier.
 
 ---
 
-## 📸 Screenshot
+## 📸 Screenshots
 
+### 🏠 Home
+![Home Screenshot](https://github.com/your-username/Anki-FlashCards/blob/main/home.png?raw=true)
 
-![Home Screenshot](./screenshots/home.png)
+### ➕ Create New Card
+![Create New Card](https://github.com/your-username/Anki-FlashCards/blob/main/create-card.png?raw=true)
+
+### 📖 Display All Cards
+![All Cards](https://github.com/your-username/Anki-FlashCards/blob/main/all-cards.png?raw=true)
+
+### ✏️ Edit Card
+![Edit Card](https://github.com/your-username/Anki-FlashCards/blob/main/edit-card.png?raw=true)
 
 
 ---
