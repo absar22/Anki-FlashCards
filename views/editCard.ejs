@@ -7,17 +7,20 @@
 <body>
   <h1>Edit Card</h1>
   <form action="/cards/<%= card._id %>?_method=PUT" method="POST">
-    <label>Question:</label>
-    <input type="text" name="front" value="<%= card.question %>" required><br><br>
+    
+    <label>Question:</label><br>
+    <textarea name="front" rows="4" cols="40" required><%= card.question %></textarea><br><br>
 
-    <label>Answer:</label>
-    <input type="text" name="back" value="<%= card.answer %>" required><br><br>
+    <label>Answer:</label><br>
+    <textarea name="back" rows="4" cols="40" required><%= card.answer %></textarea><br><br>
 
     <label>Tag/Deck:</label>
     <input type="text" name="deck" value="<%= card.tag %>"><br><br>
 
     <button type="submit">Update Card</button>
   </form>
+  
   <a href="/cards">Cancel</a>
 </body>
 </html>
+
