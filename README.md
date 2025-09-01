@@ -12,14 +12,19 @@ You can create, edit, and delete cards to make studying easier.
 <img width="1920" height="849" alt="home" src="https://github.com/user-attachments/assets/126d450f-4419-4742-8a58-0244c010e8f5" />
 
 ### ➕ Create New Card
-![Create New Card](https://github.com/your-username/Anki-FlashCards/blob/main/create-card.png?raw=true)
+![Create New Card]<img width="1920" height="859" alt="Create New Card" src="https://github.com/user-attachments/assets/618ae31d-8a3a-40ee-bbd6-412540edf84c" />
 
-### 📖 Display All Cards
-![All Cards](https://github.com/your-username/Anki-FlashCards/blob/main/all-cards.png?raw=true)
+
+### 📖 Display All Cards!
+[Uploading Create New Card.png…]
+<img width="1920" height="859" alt="display-AllCards" src="https://github.com/user-attachments/assets/acf53cfb-ae0b-4f9f-a3f1-cd849c1432be" />
+
+
 
 ### ✏️ Edit Card
-![Edit Card](https://github.com/your-username/Anki-FlashCards/blob/main/edit-card.png?raw=true)
+![Edit Card]
 
+<img width="1920" height="1020" alt="EditCards" src="https://github.com/user-attachments/assets/66738d88-80e5-48f0-a5b0-7b40dbba73d8" />
 
 ---
 
