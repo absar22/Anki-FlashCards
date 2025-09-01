@@ -23,10 +23,11 @@ You can create, edit, and delete cards to make studying easier.
 
 ### ✏️ Edit Card
 ![Edit Card]
+<img width="1920" height="859" alt="EditCards" src="https://github.com/user-attachments/assets/d4fbd068-be7e-4c8d-9f57-42375a7b13af" />
 
-<img width="1920" height="1020" alt="EditCards" src="https://github.com/user-attachments/assets/66738d88-80e5-48f0-a5b0-7b40dbba73d8" />
 
 ---
+
 
 ## 🚀 Features
 - ➕ Create flashcards (question, answer, deck/tag)
