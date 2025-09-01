@@ -50,5 +50,37 @@ module.exports = {
        console.error(err)
       res.redirect('/cards')
     }
+  },
+
+  // Update Card
+
+
+updateCard: async (req, res) => {
+  try {
+    const { front, back, deck } = req.body
+    await Card.findByIdAndUpdate(req.params.id, {
+      question: front,
+      answer: back,
+      tag: deck
+    })
+    res.redirect('/cards') // back to all cards page
+  } catch (err) {
+    console.error(err)
+    res.status(500).send('Error updating card')
   }
+},
+
+
+showEditCardForm: async (req, res) => {
+  try {
+    const card = await Card.findById(req.params.id)
+    if (!card) return res.status(404).send('Card not found')
+    res.render('editCard', { card })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send('Error loading edit form')
+  }
+}
+
+
 }

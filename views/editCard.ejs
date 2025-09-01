@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Card</title>
+</head>
+<body>
+  <h1>Edit Card</h1>
+  <form action="/cards/<%= card._id %>?_method=PUT" method="POST">
+    <label>Question:</label>
+    <input type="text" name="front" value="<%= card.question %>" required><br><br>
+
+    <label>Answer:</label>
+    <input type="text" name="back" value="<%= card.answer %>" required><br><br>
+
+    <label>Tag/Deck:</label>
+    <input type="text" name="deck" value="<%= card.tag %>"><br><br>
+
+    <button type="submit">Update Card</button>
+  </form>
+  <a href="/cards">Cancel</a>
+</body>
+</html>

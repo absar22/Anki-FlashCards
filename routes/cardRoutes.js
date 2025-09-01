@@ -13,6 +13,13 @@ router.get('/cards', cardController.showAllCards)
 router.post('/cards', cardController.createCard)
 
 
+// Add the Update Route (PUT)
+router.put('/cards/:id', cardController.updateCard)
+
+// Show editedCards
+router.get('/cards/:id/edit', cardController.showEditCardForm)
+
+
 // DELETE Card
 router.delete('/cards/:id', cardController.deleteCard)
 
