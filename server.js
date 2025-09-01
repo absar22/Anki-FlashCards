@@ -4,6 +4,7 @@ const connectDB = require('./config/db')
 const app = express()
 const mainRoutes = require('./routes/mainRoutes')
 const cardRoutes = require('./routes/cardRoutes') 
+const methodOverride = require('method-override')
 const PORT = process.env.PORT || 5000
 
 // Load env vars
@@ -16,6 +17,7 @@ connectDB()
 app.set('view engine', 'ejs')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 
 

@@ -36,5 +36,19 @@ module.exports = {
       console.error(err)
       res.status(500).send('Error fetching cards')
     }
+  },
+
+  // Delete cards
+  deleteCard: async (req,res) => {
+    try{
+      const cards = await Card.findByIdAndDelete(req.params.id)
+      console.log('Card deleted')
+      res.redirect('/cards')   // go back to all cards page
+
+    }catch(err){
+
+       console.error(err)
+      res.redirect('/cards')
+    }
   }
 }

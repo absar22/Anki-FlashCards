@@ -13,4 +13,8 @@ router.get('/cards', cardController.showAllCards)
 router.post('/cards', cardController.createCard)
 
 
+// DELETE Card
+router.delete('/cards/:id', cardController.deleteCard)
+
+
 module.exports = router
