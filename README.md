@@ -68,11 +68,8 @@ node server.js
 🔮 Future Improvements
 
 🔑 User authentication (login/register)
-
 🔄 Review mode with card flipping
-
 📚 Multiple decks
-
 ⏳ Spaced repetition system (like Anki)
 
 📜 License
