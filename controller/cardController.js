@@ -1,5 +1,14 @@
 
-const Card = require('../models/Cards')   
+const Card = require('../models/Cards') 
+
+// Simple Fisher–Yates shuffle helper
+function shuffle(array){
+ for(let i = array.length -1 ; i > 0; i++){
+  const j = Math.floor(Math.random()*i + 1)
+  [array[i] , array[j] = array[j], array[i]]
+ }
+ return array
+}
 
 module.exports = {
   // Show form
@@ -80,7 +89,19 @@ showEditCardForm: async (req, res) => {
     console.error(err)
     res.status(500).send('Error loading edit form')
   }
-}
+},
+
+// Study Mode
+  getStudy: async (req,res) => {
+    try{
+      let cards = await Card.find().select('question answer').lean()
+      cards = shuffle(cards)  // randomize order
+      res.render('study',{cards})
+    }catch(err){ 
+      console.log(`Error loadind study mode ${err}`)
+      res.status(500).send('Error loading study mode')
+    }
+  }
 
 
 }

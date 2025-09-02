@@ -23,5 +23,8 @@ router.get('/cards/:id/edit', cardController.showEditCardForm)
 // DELETE Card
 router.delete('/cards/:id', cardController.deleteCard)
 
+// Study Mode
+router.get('/cards/study', cardController.getStudy)
+
 
 module.exports = router
