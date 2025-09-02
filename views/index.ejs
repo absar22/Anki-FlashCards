@@ -3,16 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>Home - Anki</title>
+  <link rel="stylesheet" href="/css/styles.css"> <!-- optional -->
 </head>
 <body>
-  <h1>Welcome to Anki</h1>
+  <header>
+    <h1>Welcome to Anki</h1>
+  </header>
 
-  <ul>
-    <li><a href="/createCards">Add New Card</a></li>
-    <li><a href="/cards">View All Cards</a></li>
-    <li><a href="/study">Start Study Mode</a></li>
-  </ul>
+  <nav>
+    <ul>
+      <li><a href="/createCards">Add New Card</a></li>
+      <li><a href="/cards">View All Cards</a></li>
+      <li><a href="/study">Start Study Mode</a></li>
+    </ul>
+  </nav>
 
-  <p>Total cards in your collection: <%= totalCards %></p>
+  <footer>
+    <p>Total cards in your collection: <%= totalCards %></p>
+  </footer>
 </body>
 </html>

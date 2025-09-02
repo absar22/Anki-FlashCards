@@ -1,0 +1,43 @@
+<!-- views/study.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Study Mode - Anki</title>
+  <!-- <link rel="stylesheet" href="/css/study.css"> -->
+</head>
+<body>
+  <main class="container">
+    <h1>Study Mode</h1>
+
+    <section class="card">
+      <div id="question" class="face"></div>
+      <div id="answer" class="face answer" hidden></div>
+
+      <div class="controls">
+        <button id="showBtn">Show Answer</button>
+        <button id="nextBtn" hidden>Next Card</button>
+      </div>
+
+      <div id="progress" class="progress"></div>
+    </section>
+
+    <nav class="nav">
+      <a href="/">Back to Home</a>
+    </nav>
+  </main>
+
+
+
+<!-- views/study.ejs -->
+<script id="cards-data" type="application/json">
+  <%- JSON.stringify(cards || []) %>
+</script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+</body>
+</html>
