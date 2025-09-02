@@ -2,6 +2,7 @@ const express = require('express')
 const dotenv = require('dotenv')
 const connectDB = require('./config/db')
 const app = express()
+const path = require('path');
 const mainRoutes = require('./routes/mainRoutes')
 const cardRoutes = require('./routes/cardRoutes') 
 const methodOverride = require('method-override')
@@ -18,7 +19,7 @@ app.set('view engine', 'ejs')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
-
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', mainRoutes)
