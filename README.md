@@ -9,7 +9,8 @@ You can create, edit, and delete cards to make studying easier.
 
 ### 🏠 Home
 ![Home Screenshot]
-<img width="1920" height="849" alt="home" src="https://github.com/user-attachments/assets/126d450f-4419-4742-8a58-0244c010e8f5" />
+<img width="1920" height="856" alt="Home - Anki - Google Chrome 03-09-2025 00_09_04" src="https://github.com/user-attachments/assets/45db3e31-8e10-4b16-bc2f-4fe0bc61dc85" />
+
 
 ### ➕ Create New Card
 ![Create New Card]<img width="1920" height="859" alt="Create New Card" src="https://github.com/user-attachments/assets/618ae31d-8a3a-40ee-bbd6-412540edf84c" />
@@ -25,6 +26,9 @@ You can create, edit, and delete cards to make studying easier.
 ![Edit Card]
 <img width="1920" height="859" alt="EditCards" src="https://github.com/user-attachments/assets/d4fbd068-be7e-4c8d-9f57-42375a7b13af" />
 
+### 📖 Study Mode!
+![Study Card]
+<img width="1920" height="844" alt="Home - Anki - Google Chrome 03-09-2025 00_09_44" src="https://github.com/user-attachments/assets/3e6de24c-5de4-4339-9a4d-66687c541ec5" />
 
 ---
 
