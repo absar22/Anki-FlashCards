@@ -35,12 +35,27 @@ Check out the **live demo** of the app on Render:
 
 
 ## 🚀 Features
-- ➕ Create flashcards (question, answer, deck/tag)
-- 📖 View all saved cards
-- ✏️ Edit existing cards
-- ❌ Delete cards
-- 🛠 Built with MVC structure
+➕ Create flashcards (question, answer, deck/tag)
 
+📖 View all saved cards
+
+✏️ Edit existing cards
+
+❌ Delete cards
+
+📚 Study Mode:
+
+Show one card at a time
+
+Reveal answer with a button
+
+Next card navigation
+
+Card progress tracking (e.g., Card 3 of 10)
+
+Cards appear in random order each time
+
+🛠 Built with MVC structure
 ---
 
 ## 🛠 Tech Stack
@@ -71,11 +86,10 @@ PORT=5000
 node server.js
 
 🔮 Future Improvements
-
 🔑 User authentication (login/register)
-🔄 Review mode with card flipping
-📚 Multiple decks
 ⏳ Spaced repetition system (like Anki)
+🔄 More advanced review modes
+📚 Multiple decks and categories
 
 📜 License
 
