@@ -62,6 +62,7 @@ Cards appear in random order each time
 - **Backend:** Node.js, Express.js  
 - **Database:** MongoDB + Mongoose  
 - **View Engine:** EJS  
+- **Front-end:** Vanilla JavaScript for Study Mode interactions
 - **Middleware:** Method-Override, Express JSON  
 
 ---
