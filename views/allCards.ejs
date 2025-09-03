@@ -12,6 +12,12 @@
     <% cards.forEach(card => { %>
       <li>
         <strong>Question:</strong> <%= card.question %> <br>
+                <!-- 
+          Using <pre><code> preserves line breaks and spaces for code.
+          <pre>   -> keeps formatting exactly as typed
+          <code>  -> shows it in a monospace font (like coding editors)
+          <%= %> -> escapes HTML so it's safe, while still showing the actual code
+        -->
        <strong>Answer:</strong> 
        <pre><code><%= card.answer %></code></pre>
 
