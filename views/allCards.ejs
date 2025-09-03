@@ -12,7 +12,9 @@
     <% cards.forEach(card => { %>
       <li>
         <strong>Question:</strong> <%= card.question %> <br>
-        <strong>Answer:</strong> <%= card.answer %> <br>
+       <strong>Answer:</strong> 
+       <pre><code><%= card.answer %></code></pre>
+
         <strong>Tag:</strong> <%= card.tag %> <br>
        
          <!-- Edit button -->
