@@ -2,7 +2,10 @@ const dotenv = require('dotenv')
 const express = require('express')
 const connectDB = require('./config/db')
 const session = require('express-session')
-const passport = require('./config/passport')
+// const passport = require('./config/passport')
+const passport = require('passport')
+require('./config/passport')(passport)
+
 const MongoStore = require('connect-mongo')
 const app = express()
 const path = require('path');
@@ -39,7 +42,7 @@ app.use(passport.session())
 
 // Make user available in all EJS views
 app.use((req, res, next) => {
-  res.locals.user = req.user
+  res.locals.user = req.user || null
   next()
 })
 

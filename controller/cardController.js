@@ -25,7 +25,8 @@ module.exports = {
       await Card.create({
         question: front,
         answer: back,
-        tag: deck || 'general'
+        tag: deck || 'general',
+        user: req.user._id  
       })
 
       res.redirect('/')  // after saving, go back home
@@ -39,7 +40,7 @@ module.exports = {
    
   showAllCards: async (req, res) => {
     try {
-      const cards = await Card.find().sort({createdAt: -1})
+      const cards = await Card.find({ user: req.user._id }).sort({createdAt: -1})
       res.render('allCards', {cards})
     } catch (err) {
       console.error(err)
@@ -94,7 +95,7 @@ showEditCardForm: async (req, res) => {
 // Study Mode
   getStudy: async (req,res) => {
     try{
-      let cards = await Card.find().select('question answer').lean()
+      let cards = await Card.find({ user: req.user._id }).select('question answer').lean()
       cards = shuffle(cards)  // randomize order
       res.render('study',{cards})
     }catch(err){ 
