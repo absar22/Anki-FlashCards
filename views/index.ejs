@@ -24,6 +24,19 @@
       <li><a href="/createCards">Add New Card</a></li>
       <li><a href="/cards">View All Cards</a></li>
       <li><a href="/study">Start Study Mode</a></li>
+
+      <% if (typeof user !== 'undefined' && user) { %>
+        <li>
+          <a href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Logout
+          </a>
+        </li>
+        <form id="logout-form" action="/logout" method="POST" style="display:none;"></form>
+        <li><span>Welcome, <%= user.username %></span></li>
+      <% } else { %>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/signup">Sign Up</a></li>
+      <% } %>
     </ul>
   </nav>
 
