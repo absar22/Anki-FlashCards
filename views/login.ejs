@@ -13,6 +13,18 @@
   </style>
 </head>
 <body>
+  <% if (success_msg) { %>
+  <div class="alert alert-success"><%= success_msg %></div>
+<% } %>
+
+<% if (error_msg) { %>
+  <div class="alert alert-danger"><%= error_msg %></div>
+<% } %>
+
+<% if (error) { %>   <!-- passport failure messages appear here -->
+  <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
   <form action="/login" method="POST">
     <h2 style="text-align:center;">Login</h2>
     <input type="email" name="email" placeholder="Email" required>

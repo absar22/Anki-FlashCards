@@ -13,6 +13,14 @@
   </style>
 </head>
 <body>
+  <% if (error_msg) { %>
+  <div class="alert alert-danger"><%= error_msg %></div>
+<% } %>
+
+<% if (success_msg) { %>
+  <div class="alert alert-success"><%= success_msg %></div>
+<% } %>
+
   <form action="/signup" method="POST">
     <h2 style="text-align:center;">Sign Up</h2>
     <!-- <input type="text" name="username" placeholder="Username" required> -->
