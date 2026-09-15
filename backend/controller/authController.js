@@ -1,73 +1,36 @@
 import {User }from '../models/User.js'
- import passport from 'passport'
-  import validator from 'validator'
+import {ApiError} from '../utils/apiError.js'
+import { ApiResponse } from '../utils/apiResponse.js'
+import {asyncHandler} from '../utils/asyncHandler.js'
 
-const register = async (req, res, next) => {
-  try {
-    const { userName, email, password } = req.body
+const register = asyncHandler (async (req,res) => {
+   const {userName,email,password} = req.body
+   const existingUser = await User.findOne({
+    $or:[{userName}, {email}]
+   })
+   if(existingUser){
+    throw new ApiError(409, 'User already exists')
+   }
+   const user = await User.create({
+    userName,
+    email,
+    password
 
-  
-    if (!userName || !email || !password) {
-      res.status(400).json({ error: 'All fields are required' })
-    }
+   })
+   const createdUser = await User.findById(user._id).select('-password -refreshToken')
+    if(!createdUser){
+         throw new ApiError(500, 'Error fetching created user')
+     }
+     return res.status(200).json(
+      new ApiResponse(201, createdUser, 'User registered Successfully')
+     )
 
-    if (!validator.isEmail(email)) {
-      res.status(400).json({ error: 'Invalid email' })
-    }
+})
 
-    if (!validator.isLength(userName, { min: 3, max: 20 })) {
-      res.status(400).json({ error: 'Invalid username' })
 
-    }
 
-    if (!validator.isStrongPassword(password, {
-      minLength: 6,
-      minLowercase: 1,
-      minUppercase: 0,
-      minNumbers: 1,
-      minSymbols: 0
-    })) { 
-     res.status(400).json({ error: 'Password must be at least 6 characters and include a number' })
-    }
 
-    const existing = await User.findOne(
-      { 
-        $or: [{ email }, { userName }]
-       }
-    )
-    if (existing) {
-      res.status(400).json({ error: 'User already exists' })
-    }
 
-    const newUser = await User.create({ userName, email, password })
 
-    //  Auto login after signup
-    req.login(newUser, (err) => {
-      if (err) return next(err)
-      res.status(201).json({ message: 'User registered successfully', user: newUser })
-    })
-  } catch (err) {
-    console.error('Signup error:', err)
 
-    res.status(500).json({ error: 'Internal server error' })
-   
-  }
-}
-
-const login = (req, res, next) => {
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true // ✅ enables flash message from passport
-  })(req, res, next)
-  res.status(200).json({ message: 'Login successful' })
-
-}
-
-const logout = (req, res) => {
-  req.logout(() => {
-     res.status(200).json({message:"Logot succesfully"})
-  })
-}
-
-export {register,login,logout}
+export {register}

@@ -4,10 +4,8 @@ dotenv.config({
 })
 import express from 'express'
 import connectDB from './config/db.js'
-import session from 'express-session'
-import passport from 'passport'
-import {configurePassport} from './config/passport.js'
-import MongoStore from 'connect-mongo'  //stores Express session data in MongoDB
+
+
 import {mainRoutes} from './routes/mainRoutes.js'
 import {cardRoutes }from './routes/cardRoutes.js'
 import {authRoutes} from './routes/authRoutes.js'
