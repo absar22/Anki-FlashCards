@@ -1,0 +1,44 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home - Anki</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f6f6f6; margin:0; color:#333; }
+    header, footer, nav { background:#fff; text-align:center; border-bottom:1px solid #ddd; }
+    header h1 { margin:0; padding:20px 0; font-weight:normal; color:#4a4a4a; }
+    nav ul { display:flex; justify-content:center; list-style:none; margin:0; padding:0; }
+    nav li { margin:0 10px; }
+    nav a { text-decoration:none; color:#0077cc; padding:12px 15px; display:block; transition:.2s; }
+    nav a:hover { background:#0077cc; color:#fff; border-radius:4px; }
+    footer { padding:15px 0; font-size:14px; color:#777; border-top:1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome <%= user ? user.userName : 'Guest' %>!</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="/createCards">Add New Card</a></li>
+      <li><a href="/cards">View All Cards</a></li>
+      <li><a href="/study">Start Study Mode</a></li>
+
+      <% if (user) { %>
+        <li>
+          <a href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+          <form id="logout-form" action="/logout" method="POST" style="display:none;"></form>
+        </li>
+      <% } else { %>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/signup">Sign up</a></li>
+      <% } %>
+    </ul>
+  </nav>
+
+  <footer>
+    <p>Total cards in your collection: <%= totalCards %></p>
+  </footer>
+</body>
+</html> -->
