@@ -4,6 +4,8 @@ dotenv.config({
 })
 import express from 'express'
 import connectDB from './config/db.js'
+import cookieParser from 'cookie-parser';
+import cors from 'cors'
 
 
 import {mainRoutes} from './routes/mainRoutes.js'
@@ -16,24 +18,17 @@ const PORT = process.env.PORT || 5000
 
 // Connect Database
 connectDB()
+app.use(cors({
+    origin: process.env.CORS_ORIGIN,
+    credentials: true
+}));
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-// Session setup
-app.use(session({
-  secret: 'yourSecretKey',
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.DB_STRING
-  })
-}))
+app.use(express.json({limit:'16kb'}))
+app.use(express.urlencoded({ extended: true, limit: '16kb' }))
+app.use(cookieParser());
 
 
-// Passport setup
-configurePassport(passport)
-app.use(passport.initialize())
-app.use(passport.session())
+
 
 // Routes
 app.use('/', mainRoutes)
