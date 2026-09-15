@@ -1,11 +1,15 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+
 
 const UserSchema = new mongoose.Schema({
   userName: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    toLower: true,
+    trim: true
   },
 
   email: {
@@ -17,6 +21,10 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  refreshToken: {
+    type:String,
+    required:true
   }
 })
 
@@ -31,6 +39,8 @@ UserSchema.pre('save', async function () {
 UserSchema.methods.comparePassword = function (candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password)
 }
+
+const generateAccessToken = 
 
 const User = mongoose.model('User', UserSchema)
 
