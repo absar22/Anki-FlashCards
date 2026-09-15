@@ -8,8 +8,8 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    toLower: true,
-    trim: true
+    trim: true,
+    index:true
   },
 
   email: {
@@ -20,11 +20,10 @@ const UserSchema = new mongoose.Schema({
 
   password: {
     type: String,
-    required: true
+    required: [true, "Password is required"]
   },
   refreshToken: {
-    type:String,
-    required:true
+    type:String
   }
 })
 
@@ -40,7 +39,32 @@ UserSchema.methods.comparePassword = function (candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password)
 }
 
-const generateAccessToken = 
+UserSchema.methods.generateAccessToken = function(){
+  return jwt.sign(
+    {
+    _id: this._id,
+    email: this.email,
+    userName: this.userName,
+
+  },
+  process.env.ACCESS_TOKEN_SECRET,
+  {
+    expiresIn:process.env.ACCESS_TOKEN_SECRET_EXPIRES_IN
+  }
+)
+}
+
+UserSchema.methods.generateRefreshToken = function (){
+  return jwt.sign(
+    {
+      _id:this._id
+    },
+    process.env.REFRESH_TOKEN_SECRET,
+    {
+      expiresIn:REFRESH_TOKEN_SECRET_EXPIRES_IN
+    }
+  )
+}
 
 const User = mongoose.model('User', UserSchema)
 
