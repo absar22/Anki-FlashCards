@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
   refreshToken: {
     type:String
   }
-})
+}, {timestamps:true})
 
 // Hash password before saving
 UserSchema.pre('save', async function () {
@@ -61,7 +61,7 @@ UserSchema.methods.generateRefreshToken = function (){
     },
     process.env.REFRESH_TOKEN_SECRET,
     {
-      expiresIn:REFRESH_TOKEN_SECRET_EXPIRES_IN
+      expiresIn:process.env.REFRESH_TOKEN_SECRET_EXPIRES_IN
     }
   )
 }

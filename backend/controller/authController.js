@@ -7,7 +7,9 @@ const generateAccessAndRefreshToken = async(userId) => {
   try{
     const user =  await User.findById(userId)
     const accessToken =  await user.generateAccessToken()
+    // console.log("AccessToken :", accessToken)
     const refreshToken = await user.generateRefreshToken()
+    // console.log("refreshToken :",refreshToken)
     user.refreshToken = refreshToken
     await user.save({validateBeforeSave:false})
     return {accessToken,refreshToken}
@@ -17,7 +19,7 @@ const generateAccessAndRefreshToken = async(userId) => {
 
 }
 
-const options = {
+const cookiesOptions = {
   httpOnly:true,
   secure:true
 }
@@ -49,27 +51,33 @@ const register = asyncHandler (async (req,res) => {
 const login = asyncHandler (async (req,res) => {
   const {email, password} = req.body
   const user = await User.findOne({
-    $or:[{userName},{email}]
+    $or:[{email}]
   })
    if(!user){
      throw new ApiError(404, 'User not existited')
    } 
    const isPasswordValid = await user.comparePassword(password)
    if(!isPasswordValid){
-    throw new ApiError(404, 'Incorrect password')
+    throw new ApiError(404,  'Incorrect password')
    }
 
    const {accessToken,refreshToken} = await generateAccessAndRefreshToken(user._id)
    const loggedInUser = await User.findById(user._id).select('-password -refreshToken')
-   res.status(200).cookie('accessToken', accessToken ,options).cookie('refreshToken', refreshToken, options)
-   .json(200, {user:  loggedInUser , accessToken, refreshToken}, 'Account logged successfully')
+
+     res.status(200).cookie('accessToken', accessToken,cookiesOptions).cookie('refreshToken', refreshToken,cookiesOptions)
+   .json(new ApiResponse(201,  {user: loggedInUser, accessToken, refreshToken}, 'Account logged successfully'))
    
 })
 
+const logout = asyncHandler(async(req,res) => {
+   await User.findByIdAndUpdate(req.user._id, {
+    $set: {refreshToken: undefined}
+   })
+ 
+   res.status(200)
+   .clearCookie('accessToken', cookiesOptions)
+   .clearCookie('refreshToken', cookiesOptions)
+   .json(new ApiResponse(200, {}, 'Logged out successfully'))
+})
 
-
-
-
-
-
-export {register,login}
+export {register,login,logout}

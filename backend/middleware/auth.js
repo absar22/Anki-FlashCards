@@ -1,22 +1,20 @@
+import { User } from "../models/User.js";
+import { ApiError } from "../utils/apiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import jwt from "jsonwebtoken"
 
-  const ensureAuth = (req, res, next) => {
-    if (req.isAuthenticated()) {
-      return next(); // user is logged in, proceed
-    }
-    
-  return res.status(401).json({
-    error: 'Authentication required'
-  })
-  }
+export const jwtVerify = asyncHandler(async(req,_,next) => {
+   const token = req.cookies?.accessToken || req.headers?.authorization?.replace('Bearer ', '')
+   if(!token){
+    throw new ApiError(401, 'Unauthorized access"')
+   }
 
-  const ensureGuest = (req, res, next) => {
-    if (!req.isAuthenticated()) {
-      return next(); // guest, proceed
-    }
-    return res.status(403).json({
-    error: 'You are already logged in'
-  })
-    
-  }
-
-  export {ensureAuth,ensureGuest}
+   const decodedToken =  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+  //  console.log(decodedToken)
+   const user = await User.findById(decodedToken?._id)
+   if(!user){
+     throw new ApiError(401, 'Invalid access token')
+   }
+   req.user = user
+   next()
+})
