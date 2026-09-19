@@ -26,7 +26,7 @@ const cookiesOptions = {
 }
 
 const register = asyncHandler (async (req,res) => {
-   const {userName,email,password} = req.body
+   const {userName,fullname,email,password} = req.body
    const existingUser = await User.findOne({
     $or:[{userName}, {email}]
    })
@@ -36,6 +36,7 @@ const register = asyncHandler (async (req,res) => {
    const user = await User.create({
     userName,
     email,
+    fullname,
     password
 
    })
@@ -112,4 +113,44 @@ const refreshAccessToken = asyncHandler(async(req,res) => {
   }
 })
 
-export {register,login,logout, refreshAccessToken}
+const updateCurrentPassword = asyncHandler(async(req,res) => {
+  const {oldPassword,newPassword,confirmPassword} = req.body
+  if(newPassword !== confirmPassword){
+    throw new ApiError(401, 'New password and confirm password d0 not match')
+  }
+  const user = await User.findById(req?.user?._id)
+  if(!user){
+    throw new ApiError(400, 'User is not existed')
+  }
+  const isPasswordCorrect = comparePassword(oldPassword)
+  if(!isPasswordCorrect){
+    throw ApiError(400, 'Invalid old password')
+  }
+  user.password = newPassword
+  user.save({validateBeforeSave:false})
+  return res.status(201).json(new ApiResponse(201,{},'Password updated succesfully'))
+})
+const getCurrentUser = asyncHandler(async(req,res) => {
+  const user = await User.findById(req?.user?._id).select('-password -refreshToken')
+  if(!user){
+    throw new ApiError(400,'User not found')
+  }
+  return res.status(201).json(new ApiResponse(201,user,'User fetched successfully'))
+})
+
+const updateUser = asyncHandler(async(req,res) => {
+  const {fullname, email} = req.body
+  const user = await User.findByIdAndUpdate(req?.user?._id, {
+    $set:{
+      fullname,
+      email
+    }
+  },{new:true})
+
+  if(!user){
+    throw new ApiError(400, 'No user found')
+  }
+  return res.status(201).json(new ApiResponse(201, 'User created succesfully'))
+})
+
+export {register,login,logout, refreshAccessToken,updateCurrentPassword,getCurrentUser,updateUser}

@@ -3,7 +3,7 @@ import { Router } from 'express'
 import {register,login,logout} from '../controller/authController.js'
 
 import { jwtVerify } from '../middleware/auth.js'
-import { registerSchema } from '../validators/authValidator.js'
+import { registerSchema, loginSchema } from '../validators/authValidator.js'
 import { validate } from '../middleware/validate.js'
 
 const authRoutes = Router()
@@ -13,7 +13,7 @@ const authRoutes = Router()
 authRoutes.post('/signup',  validate(registerSchema), register)
 
 // Login
-authRoutes.post('/login', login)
+authRoutes.post('/login', validate(loginSchema), login)
 
 // Logout
 authRoutes.post('/logout', jwtVerify, logout)

@@ -11,6 +11,13 @@ const UserSchema = new mongoose.Schema({
     trim: true,
     index:true
   },
+  fullname:{
+   type:String,
+   required: true,
+   unique: true,
+   trim: true,
+   index:true
+  },
 
   email: {
     type: String,
