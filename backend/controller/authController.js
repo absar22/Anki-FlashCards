@@ -82,13 +82,13 @@ const logout = asyncHandler(async(req,res) => {
 })
 
 const refreshAccessToken = asyncHandler(async(req,res) => {
-  const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
-  if(!incomingRefreshToken){
+  const clientRefreshToken = req.cookies.refreshToken || req.body.refreshToken
+  if(!clientRefreshToken){
      throw new ApiError(400, 'refresh token is requried')
   }
   try {
     // verify refrestoken
-    const decodedToken =  jwt.Verify(incomingRefreshToken, process.env.ACCESS_TOKEN_SECRET)
+    const decodedToken =  jwt.verify(clientRefreshToken, process.env.ACCESS_TOKEN_SECRET)
 
     // find user from decodedToken
     const user = await User.findById(decodedToken._id)
@@ -97,7 +97,7 @@ const refreshAccessToken = asyncHandler(async(req,res) => {
     }
 
     // compare refreshtoken of client and your db saved refreshtoken
-    if(incomingRefreshToken !== user.refreshToken){
+    if(clientRefreshToken !== user.refreshToken){
       throw new ApiError(404, 'Refresh token is expired')
     }
   //  if everything is file create a new refrest and access toiken for the client
