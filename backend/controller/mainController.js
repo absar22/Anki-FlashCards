@@ -1,19 +1,18 @@
 
 import { Card }  from '../models/Cards.js'
+import { asyncHandler } from '../utils/asyncHandler.js';
+import { ApiError } from '../utils/apiError.js';
+import { ApiResponse } from '../utils/apiResponse.js';
+import { User } from '../models/User.js';
 
 
-  const getIndex =  async function (req, res) {
-    try {
-      const totalCards = await Card.countDocuments({ user: req.user._id }); // only user's cards
-      res.status(200).json({
-        totalCards,
-        userName : req.user.userName // greet the logged-in user
-      });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({
-      error: 'Error loading dashboard'
-    })
+  const getIndex = asyncHandler(async(req,res) => {
+    const user = await User.findById(req?.user?._id).select('-password -refreshToken')
+    if(!user){
+      throw new ApiError(400, 'User not found')
     }
-  }
+    const totalCards = await Card.countDocuments({user: req.user._id})
+    return res.status(200).json(new ApiResponse(200, {data: user, totalCards}, 'Total cards fetched successuflly'))
+
+  })
 export {getIndex}
