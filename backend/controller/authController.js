@@ -3,6 +3,7 @@ import {User }from '../models/User.js'
 import {ApiError} from '../utils/apiError.js'
 import { ApiResponse } from '../utils/apiResponse.js'
 import {asyncHandler} from '../utils/asyncHandler.js'
+import jwt from 'jsonwebtoken'
 
 const generateAccessAndRefreshToken = async(userId) => {
   try{
@@ -44,7 +45,7 @@ const register = asyncHandler (async (req,res) => {
     if(!createdUser){
          throw new ApiError(500, 'Error fetching created user')
      }
-     return res.status(200).json(
+     return res.status(201).json(
       new ApiResponse(201, createdUser, 'User registered Successfully')
      )
 
@@ -67,7 +68,7 @@ const login = asyncHandler (async (req,res) => {
    const loggedInUser = await User.findById(user._id).select('-password -refreshToken')
 
      res.status(200).cookie('accessToken', accessToken,cookiesOptions).cookie('refreshToken', refreshToken,cookiesOptions)
-   .json(new ApiResponse(201,  {user: loggedInUser, accessToken, refreshToken}, 'Account logged successfully'))
+   .json(new ApiResponse(200,  {user: loggedInUser, accessToken, refreshToken}, 'Account logged successfully'))
    
 })
 
@@ -89,7 +90,7 @@ const refreshAccessToken = asyncHandler(async(req,res) => {
   }
   try {
     // verify refrestoken
-    const decodedToken =  jwt.verify(clientRefreshToken, process.env.ACCESS_TOKEN_SECRET)
+    const decodedToken =  jwt.verify(clientRefreshToken, process.env.REFRESH_TOKEN_SECRET)
 
     // find user from decodedToken
     const user = await User.findById(decodedToken._id)
@@ -102,7 +103,7 @@ const refreshAccessToken = asyncHandler(async(req,res) => {
       throw new ApiError(404, 'Refresh token is expired')
     }
   //  if everything is file create a new refrest and access toiken for the client
-  const {accessToken,refreshToken} = generateAccessAndRefreshToken(user._id)
+  const {accessToken,refreshToken} = await generateAccessAndRefreshToken(user._id)
 
   return res.status(200).cookie('accessToken', accessToken, cookiesOptions).cookie('refreshToken', refreshToken,cookiesOptions)
   .json(new ApiResponse(200, {data:accessToken,refreshToken}, 'Access token refreshed successfully'))
@@ -122,12 +123,12 @@ const updateCurrentPassword = asyncHandler(async(req,res) => {
   if(!user){
     throw new ApiError(400, 'User is not existed')
   }
-  const isPasswordCorrect = comparePassword(oldPassword)
+  const isPasswordCorrect = await user.comparePassword(oldPassword)
   if(!isPasswordCorrect){
     throw ApiError(400, 'Invalid old password')
   }
   user.password = newPassword
-  user.save({validateBeforeSave:false})
+  await user.save({validateBeforeSave:false})
   return res.status(201).json(new ApiResponse(201,{},'Password updated succesfully'))
 })
 const getCurrentUser = asyncHandler(async(req,res) => {
@@ -145,12 +146,12 @@ const updateUser = asyncHandler(async(req,res) => {
       fullname,
       email
     }
-  },{new:true})
+  },{new:true}).select('-password -refreshToken')
 
   if(!user){
     throw new ApiError(400, 'No user found')
   }
-  return res.status(201).json(new ApiResponse(201, 'User created succesfully'))
+  return res.status(201).json(new ApiResponse(201, user,'User updated succesfully'))
 })
 
 export {register,login,logout, refreshAccessToken,updateCurrentPassword,getCurrentUser,updateUser}

@@ -13,7 +13,8 @@ const CardSchema = new mongoose.Schema({
   },
   tag: {
     type: String,
-    default: 'general'
+    default: 'general',
+    trim:true
   },
   user: {  
     type: mongoose.Schema.Types.ObjectId,
