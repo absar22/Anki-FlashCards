@@ -14,8 +14,10 @@ app.use(cookieParser());
 
 
 import { authRoutes } from './routes/authRoutes.js';
+import { cardRoutes } from './routes/cardRoutes.js';
 
 app.use('/api/v1', authRoutes)
+app.use('/api/v1/cards' , cardRoutes)
 
 
 export {app}

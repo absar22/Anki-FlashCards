@@ -1,7 +1,9 @@
 import {Card }from '../models/Cards.js'
+import { User } from '../models/User.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
 import { ApiError } from '../utils/apiError.js';
 import { ApiResponse } from '../utils/apiResponse.js';
-import { asyncHandler } from '../utils/asyncHandler.js';
+
 
 // Fisher-Yates shuffle
 function shuffle(array) {
@@ -9,60 +11,51 @@ function shuffle(array) {
     const j = Math.floor(Math.random() * (i + 1))
     ;[array[i], array[j]] = [array[j], array[i]]
   }
-
   return array
 }
 
-
 // Create Card
-const createCard = async (req, res) => {
-  try {
-    const { front, back, deck } = req.body
-
-    const card = await Card.create({
-      question: front,
-      answer: back,
-      tag: deck || 'general',
-      user: req.user._id
-    })
-
-    res.status(201).json({
-      message: 'Card created successfully',
-      card
-    })
-
-  } catch (err) {
-    console.error(err)
-
-    res.status(500).json({
-      error: 'Error creating card'
-    })
+const createCard = asyncHandler(async(req,res) => {
+  const {question, answer, tag} = req.body 
+  const createdCard = await Card.create({
+    question,
+    answer,
+    tag,
+    user: req.user._id
+  })
+  if(!createdCard){
+    throw new ApiError(401, 'Creating Card failed')
   }
-}
+  return res.status(201).json(new ApiResponse(201, createCard, 'Card created successfully'))
+})
 
 
 // Get All Cards
-const showAllCards = async (req, res) => {
-  try {
-    const cards = await Card.find({
-      user: req.user._id
-    }).sort({
-      createdAt: -1
-    })
+// const showAllCards = async (req, res) => {
+//   try {
+//     const cards = await Card.find({
+//       user: req.user._id
+//     }).sort({
+//       createdAt: -1
+//     })
 
-    res.status(200).json({
-      message: 'Cards fetched successfully',
-      cards
-    })
+//     res.status(200).json({
+//       message: 'Cards fetched successfully',
+//       cards
+//     })
 
-  } catch (err) {
-    console.error(err)
+//   } catch (err) {
+//     console.error(err)
 
-    res.status(500).json({
-      error: 'Error fetching cards'
-    })
-  }
-}
+//     res.status(500).json({
+//       error: 'Error fetching cards'
+//     })
+//   }
+// }
+
+const getAllCards = asyncHandler(async(req,res) => {
+  
+})
 
 
 // Delete Card
